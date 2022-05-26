@@ -2,7 +2,7 @@ package com.oop.overload.flight;
 
 public class Flight {
 
-    public final static String FLIGHT_NUMBER_PREFIX = "SAL";
+    public final static String FLIGHT_NUMBER_PREFIX = "SAL"; // Constant
     private int passengers = 0;
     private int seats = 200;
     private boolean[] isSeatAvailable = new boolean[seats];
@@ -77,7 +77,7 @@ public class Flight {
     }
 
     private boolean isSeatAvailable() {
-        return passengers < seats;
+        return passengers < getSeats();
     }
 
     @Override
@@ -88,6 +88,9 @@ public class Flight {
 
     @Override
     public boolean equals(Object obj) {
+        if (!(obj instanceof Flight)) {
+            return false;
+        }
         Flight flight = (Flight) obj;
         return this.flightNumber.equals(flight.getFlightNumber());
     }

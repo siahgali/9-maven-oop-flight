@@ -1,6 +1,6 @@
 package com.oop.overload.flight;
 
-public class Passenger {
+public final class Passenger {
     private int checkedBags;
     private int freeBags;
     private double perBagFee;

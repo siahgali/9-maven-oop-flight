@@ -4,6 +4,8 @@ import java.sql.SQLOutput;
 
 public class Main {
     public static void main(String[] args) {
+
+
         Flight montrealToIran = new Flight();
         System.out.println("montrealToIran flight number = " + montrealToIran.getFlightNumber());
 
@@ -28,6 +30,9 @@ public class Main {
         Flight montrealToAlberta = new Flight(1000);
         Passenger majid = new Passenger(3,0);
 
+        if (montrealToAlberta.equals(majid)) {
+
+        }
         montrealToAlberta.addOnePassenger(majid);
 
         System.out.println("montrealToAlberta = " + montrealToAlberta);
@@ -37,5 +42,14 @@ public class Main {
         if (montrealToAlberta.equals(montrealToNy)) {
             System.out.println("they are equals");
         }
+
+        CargoFlight cargoFlightMontrealToToronto = new CargoFlight(1001);
+        cargoFlightMontrealToToronto.addOnePackage(1f, 2.5f, 3.0f);
+        Passenger jack = new Passenger(2,0);
+        cargoFlightMontrealToToronto.addOnePassenger(jack);
+
+
+
+
     }
 }
