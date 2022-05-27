@@ -48,8 +48,18 @@ public class Main {
         Passenger jack = new Passenger(2,0);
         cargoFlightMontrealToToronto.addOnePassenger(jack);
 
+        FullLicensePilot shapour = new FullLicensePilot();
+        verifyCanAccessAFlight(shapour, montrealToAlberta);
 
+        CargoOnlyPilot massi = new CargoOnlyPilot();
+        verifyCanAccessAFlight(massi, montrealToAlberta);
+    }
 
-
+    private static void verifyCanAccessAFlight(Pilot pilot, Flight flight) {
+        if (pilot.canAccept(flight)) {
+            System.out.println("Yes you can be this flight pilot");
+        } else {
+            System.out.println("Sorry you can not be the pilot of this flight");
+        }
     }
 }
