@@ -1,6 +1,12 @@
 package com.oop.overload.flight;
 
-public final class Passenger {
+import java.net.PasswordAuthentication;
+
+public final class Passenger implements Comparable<Passenger>{
+    private String name;
+    private int memberLevel; // 1, 2 , 3
+    private int memberDays;  // Arrays.sort
+
     private int checkedBags;
     private int freeBags;
     private double perBagFee;
@@ -12,6 +18,12 @@ public final class Passenger {
     public Passenger(int checkedBags, int freeBags) {
         this.checkedBags = checkedBags;
         this.freeBags = freeBags;
+    }
+
+    public Passenger(String name, int memberLevel, int memberDays) {
+        this.name = name;
+        this.memberLevel = memberLevel;
+        this.memberDays = memberDays;
     }
 
     public int getCheckedBags() {
@@ -36,5 +48,18 @@ public final class Passenger {
 
     public void setPerBagFee(double perBagFee) {
         this.perBagFee = perBagFee;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int compareTo(Passenger passengerEntered) {
+        int result = passengerEntered.memberLevel -  this.memberLevel;
+        if (result == 0) {
+            result = passengerEntered.memberDays - this.memberDays;
+        }
+        return result;
     }
 }
