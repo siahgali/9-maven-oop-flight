@@ -1,12 +1,8 @@
 package com.oop.overload.flight;
 
-import java.net.PasswordAuthentication;
-
 public final class Passenger implements Comparable<Passenger>{
     private String name;
-    private int memberLevel; // 1, 2 , 3
-    private int memberDays;  // Arrays.sort
-
+    public RewardProgram rewardProgram = new RewardProgram();
     private int checkedBags;
     private int freeBags;
     private double perBagFee;
@@ -22,8 +18,8 @@ public final class Passenger implements Comparable<Passenger>{
 
     public Passenger(String name, int memberLevel, int memberDays) {
         this.name = name;
-        this.memberLevel = memberLevel;
-        this.memberDays = memberDays;
+        this.rewardProgram.memberLevel = memberLevel;
+        this.rewardProgram.memberDays = memberDays;
     }
 
     public int getCheckedBags() {
@@ -56,10 +52,36 @@ public final class Passenger implements Comparable<Passenger>{
 
     @Override
     public int compareTo(Passenger passengerEntered) {
-        int result = passengerEntered.memberLevel -  this.memberLevel;
+        int result = passengerEntered.rewardProgram.memberLevel -  this.rewardProgram.memberLevel;
         if (result == 0) {
-            result = passengerEntered.memberDays - this.memberDays;
+            result = passengerEntered.rewardProgram.memberDays - this.rewardProgram.memberDays;
         }
         return result;
+    }
+
+    public static class RewardProgram {
+        private int memberLevel; // 1, 2 , 3
+        private int memberDays;  // Arrays.sort
+
+        public int getMemberLevel() {
+            return memberLevel;
+        }
+
+        public void setMemberLevel(int memberLevel) {
+            this.memberLevel = memberLevel;
+        }
+
+        public int getMemberDays() {
+            return memberDays;
+        }
+
+        public void setMemberDays(int memberDays) {
+            this.memberDays = memberDays;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

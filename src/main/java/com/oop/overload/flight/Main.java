@@ -3,31 +3,42 @@ package com.oop.overload.flight;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
+        Passenger zahra = new Passenger("Zahra", 2, 100);
+        Passenger parnia = new Passenger("Parnia", 3, 50);
+        Passenger fatemeh  = new Passenger("Fatemeh", 1, 200);
 
-//        Flight montrealToIran = new Flight();
-//        System.out.println("montrealToIran flight number = " + montrealToIran.getFlightNumber());
-//
-//        montrealToIran.addOnePassenger(3);
-//        System.out.println("Passengers = " + montrealToIran.getPassengers());
-//        System.out.println("Seats = " + montrealToIran.getSeats());
-//
-//
-//        montrealToIran.addOnePassenger(2);
-//        System.out.println("Passengers = " + montrealToIran.getPassengers());
-//        System.out.println("Seats = " + montrealToIran.getSeats());
-//
-//        System.out.println("Number of passengers for montrealToIran : " +  montrealToIran.getPassengers());
-//
-//        Flight montrealToToronto = new Flight();
-//        System.out.println("montrealToToronto flight number = " + montrealToToronto.getFlightNumber());
-//        montrealToToronto.addOnePassenger(1);
-//        System.out.println("Number of passengers for montrealToToronto : " +  montrealToToronto.getPassengers());
-//
-//        System.out.println("All passengers: " + Flight.getAllPassengers());
+        Flight montrealToIran = new Flight();
+        System.out.println("montrealToIran flight number = " + montrealToIran.getFlightNumber());
+
+
+        montrealToIran.addOnePassenger(zahra);
+        System.out.println("Passengers = " + montrealToIran.getPassengers());
+        System.out.println("Seats = " + montrealToIran.getSeats());
+
+
+        montrealToIran.addOnePassenger(parnia);
+        System.out.println("Passengers = " + montrealToIran.getPassengers());
+        System.out.println("Seats = " + montrealToIran.getSeats());
+
+        for (Passenger passenger:montrealToIran) {
+            System.out.println(passenger + " ");
+        }
+        System.out.println("Number of passengers for montrealToIran : " +  montrealToIran.getPassengers());
+
+        Flight montrealToToronto = new Flight(6000);
+        System.out.println("montrealToToronto flight number = " + montrealToToronto.getFlightNumber());
+        montrealToToronto.addOnePassenger(fatemeh);
+        System.out.println("Number of passengers for montrealToToronto : " +  montrealToToronto.getPassengers());
+
+        System.out.println("All passengers: " + Flight.getAllPassengers());
+
+        Flight montrealToFrance = new Flight();
+
 //
 //        Flight montrealToAlberta = new Flight(1000);
 //        Passenger majid = new Passenger(3,0);
@@ -56,9 +67,7 @@ public class Main {
 //        CargoOnlyPilot massi = new CargoOnlyPilot();
 //        verifyCanAccessAFlight(massi, montrealToAlberta);
 
-        Passenger zahra = new Passenger("Zahra", 2, 100);
-        Passenger parnia = new Passenger("Parnia", 3, 50);
-        Passenger fatemeh  = new Passenger("Fatemeh", 1, 200);
+
 
         Passenger[] passengers = {
                 zahra, parnia, fatemeh
@@ -71,8 +80,22 @@ public class Main {
         }
 
 
+        List<Flight> flightList = new ArrayList<>();
+        flightList.add(montrealToIran);
+        flightList.add(montrealToToronto);
 
-    }
+        for (Flight flight: flightList) {
+            System.out.println(flight + " ");
+        }
+
+        System.out.println(flightList);
+        if (flightList.contains(montrealToFrance)) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+
+}
 
     private static void verifyCanAccessAFlight(Pilot pilot, Flight flight) {
         if (pilot.canAccept(flight)) {

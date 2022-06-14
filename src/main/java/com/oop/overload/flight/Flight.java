@@ -1,6 +1,11 @@
 package com.oop.overload.flight;
 
-public class Flight {
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Flight implements Iterable<Passenger>{
 
     public final static String FLIGHT_NUMBER_PREFIX = "SAL"; // Constant
     private int passengers = 0;
@@ -9,6 +14,7 @@ public class Flight {
     private static int allPassengers;
     private String flightNumber;
     private int totalCheckedBags;
+    private ArrayList<Passenger> passengerList = new ArrayList<>();
 
     {
         for (int i=0; i< seats; i++ ) {
@@ -27,24 +33,26 @@ public class Flight {
         this.flightNumber = FLIGHT_NUMBER_PREFIX + flightNumber;
     }
 
-    public void addOnePassenger() {
+    public void addOnePassenger(Passenger passenger) {
         if (isSeatAvailable()) {
             passengers += 1; //passengers = passengers +1
             allPassengers += 1;
             seats -= 1;
+            passengerList.add(passenger);
         }
     }
 
-    public void addOnePassenger(int bags) {
+    public void addPassenger(int bags, Passenger passenger) {
         if (isSeatAvailable()) {
-            addOnePassenger();
+            addOnePassenger(passenger);
             totalCheckedBags += bags;
+
         }
     }
 
-    public void addOnePassenger(Passenger passenger) {
-        addOnePassenger(passenger.getCheckedBags());
-    }
+//    public void addOnePassengerOverLoad(Passenger passenger) {
+//        addPassenger(passenger.getCheckedBags(), passenger);
+//    }
 
     public int getPassengers() {
         return passengers;
@@ -88,10 +96,16 @@ public class Flight {
 
     @Override
     public boolean equals(Object obj) {
+
         if (!(obj instanceof Flight)) {
             return false;
         }
         Flight flight = (Flight) obj;
-        return this.flightNumber.equals(flight.getFlightNumber());
+        return new EqualsBuilder().append(this.flightNumber, flight.flightNumber).isEquals();
+    }
+
+    @Override
+    public Iterator<Passenger> iterator() {
+        return passengerList.iterator();
     }
 }
