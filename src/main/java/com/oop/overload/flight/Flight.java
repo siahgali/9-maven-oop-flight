@@ -4,8 +4,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Objects;
 
-public class Flight implements Iterable<Passenger>{
+public class Flight implements Iterable<Passenger> , Comparable<Flight>{
 
     public final static String FLIGHT_NUMBER_PREFIX = "SAL"; // Constant
     private int passengers = 0;
@@ -104,8 +105,21 @@ public class Flight implements Iterable<Passenger>{
         return new EqualsBuilder().append(this.flightNumber, flight.flightNumber).isEquals();
     }
 
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(flightNumber);
+    }
+
     @Override
     public Iterator<Passenger> iterator() {
         return passengerList.iterator();
+    }
+
+    @Override
+    public int compareTo(Flight flight) {
+        int result = flight.getPassengers() - getPassengers();
+        return result;
     }
 }

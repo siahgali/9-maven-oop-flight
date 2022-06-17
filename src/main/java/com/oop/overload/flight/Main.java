@@ -1,9 +1,8 @@
 package com.oop.overload.flight;
 
 import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +11,7 @@ public class Main {
         Passenger parnia = new Passenger("Parnia", 3, 50);
         Passenger fatemeh  = new Passenger("Fatemeh", 1, 200);
 
-        Flight montrealToIran = new Flight();
+        Flight montrealToIran = new Flight(2000);
         System.out.println("montrealToIran flight number = " + montrealToIran.getFlightNumber());
 
 
@@ -37,7 +36,7 @@ public class Main {
 
         System.out.println("All passengers: " + Flight.getAllPassengers());
 
-        Flight montrealToFrance = new Flight();
+        Flight montrealToFrance = new Flight(4000);
 
 //
 //        Flight montrealToAlberta = new Flight(1000);
@@ -80,13 +79,28 @@ public class Main {
         }
 
 
-        List<Flight> flightList = new ArrayList<>();
+        //List<Flight> flightList = new ArrayList<>();
+        ArrayList<Flight> flightList = new ArrayList<>();
         flightList.add(montrealToIran);
         flightList.add(montrealToToronto);
+        flightList.add(montrealToToronto);
 
-        for (Flight flight: flightList) {
-            System.out.println(flight + " ");
-        }
+//        Flight[] flghtArray = new Flight[flightList.size()];
+//        flghtArray = (Flight[]) flightList.toArray();
+//        flightList.removeIf(new Predicate<Flight>() {
+//            @Override
+//            public boolean test(Flight flight) {
+//                return flight.getFlightNumber().equals("SAL6000") ;
+//            }
+//        });
+
+        flightList.removeIf(flight -> flight.getFlightNumber().equals("SAL6000"));
+
+//        for (Flight flight: flightList) {
+//            System.out.println(flight + " ");
+//        }
+
+        flightList.forEach(fl -> System.out.println(fl + " "));
 
         System.out.println(flightList);
         if (flightList.contains(montrealToFrance)) {
@@ -94,6 +108,31 @@ public class Main {
         } else {
             System.out.println("No");
         }
+
+        //Set<Flight> flightSet = new HashSet<>();
+        HashSet<Flight> flightSet = new HashSet<>();
+        flightSet.add(montrealToToronto);
+        flightSet.add(montrealToIran);
+        flightSet.add(montrealToToronto);
+        flightSet.add(montrealToToronto);
+
+        flightSet.forEach(flight -> System.out.println("FlightSet " + flight + " "));
+
+
+//        HashSet<String> colors = new HashSet<>();
+//        colors.add("yellow");
+//        colors.add("yellow");
+//        colors.add("black");
+//        colors.add("yellow");
+//        colors.forEach(c -> System.out.println(c + " "));
+
+        SortedSet<Flight> flightSorted = new TreeSet<>();
+        flightSorted.add(montrealToToronto);
+        flightSorted.add(montrealToIran);
+        flightSorted.add(montrealToFrance);
+        flightSorted.add(montrealToFrance);
+
+        flightSorted.forEach(flight -> System.out.println("Sorted flight " + flight));
 
 }
 
